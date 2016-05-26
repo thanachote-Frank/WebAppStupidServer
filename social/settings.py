@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     'rest_framework',
     'authapi',
+    'hadoop',
     'ui'
 )
 
