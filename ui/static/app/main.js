@@ -23,16 +23,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		});
 });
 
-app.controller('MainAuthController', function($rootScope, Restangular, $state, $scope){
+app.controller('MainAuthController', function($rootScope, Restangular, $state, $scope, $http){
 	$scope.words = "";
+	$scope.results = "";
 
-	$scope.sendWord = function(){
-		$http.post('http://52.221.229.121/hadoop/input='+words,words).success(function(data){
+	$scope.SendWords = function(){
+		console.log($scope.words)
+		var words = "{\"input\": "+$scope.words+"}"
+		$http.post('http://52.221.229.121/hadoop/input/',words).success(function(data){
         	
         });
 	}
 
-
+	$scope.ShowResults = function(){
+		console.log("show");
+		$http.get('http://52.221.229.121/hadoop/input/').success(function(data){
+        	$scope.results = data
+        });
+	}
 });
 
 })();
