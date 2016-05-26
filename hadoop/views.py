@@ -24,7 +24,7 @@ def update(self, id, result):
 class JobInit(APIView):
     serializer_class = JobSerializer
     def post(self, request):
-        url = 'http://localhost:8000/hadoop/all/' # Set destination URL here
+        url = 'http://52.221.255.33/hadoop/all/' # Set destination URL here
         post_fields = {"input": request.data['input'], "result": ''}     # Set POST fields here
         # request2 = Request(url, urlencode(post_fields).encode())
         r = requests.post(url,post_fields)
@@ -55,7 +55,7 @@ class JobViewList(APIView):
             job = serializer.save()
             file = open(str(job.id)+'.txt', 'w');
             file.write(request.data['input'])
-            # command = "pig -x local -param user_input="+job.id+".txt -f sentence_search.pig"
+            # command = "pig -x local -param user_input="+str(job.id)+".txt -f sentence_search.pig"
 
             # job = Job.objects.get(id=job.id)
             # job.result = execute(command)
