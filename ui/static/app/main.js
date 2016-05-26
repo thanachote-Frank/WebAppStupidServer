@@ -23,8 +23,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		});
 });
 
-app.controller('MainAuthController', function($rootScope, Restangular, $state){
-	$rootScope.user = null;
+app.controller('MainAuthController', function($rootScope, Restangular, $state, $scope){
+	$scope.words = "";
+
+	$scope.sendWord = function(){
+		
+	}
 });
 
 })();
