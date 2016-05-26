@@ -27,8 +27,12 @@ app.controller('MainAuthController', function($rootScope, Restangular, $state, $
 	$scope.words = "";
 
 	$scope.sendWord = function(){
-		
+		$http.post('http://52.221.229.121/hadoop/input='+words,words).success(function(data){
+        	
+        });
 	}
+
+
 });
 
 })();
