@@ -16,16 +16,26 @@
 <body ng-app="app.main">
 
 
-<div class="container">
+<div class="container" ng-controller="MainAuthController">
+<div class="row">
+<div class="col-md-5"></div>
+<div class="col-md-6">
+<img src="http://www.janium.com/wp-content/uploads/2014/06/books.png" alt="Smiley face" height="110" width="100">
+</div>
+</div>
 <h3> Input </h3>
 <form>
-	<div class="form-group">
+	<div class="form-group" >
 
 		<textarea  ng-model="words" id="input" class="form-control" rows="3" maxlength="200"  placeholder="200 words"></textarea>
 		<label for="input">remaining : {{200 - words.length}} words</label>
 	</div>
 
-	<button type="submit" class="btn btn-success form-control" ng-click="sendWord">Search</button> 
+	<div class="btn btn-success form-control" ng-click="SendWords()">Search</div> 
+	<div class="btn btn-primary form-control" ng-click="ShowResults()">Result</div> 
+	<div>
+		{{results}}
+	</div>
 </form>
 
 </div>
