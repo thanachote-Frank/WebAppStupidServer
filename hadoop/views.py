@@ -54,6 +54,7 @@ class JobViewList(APIView):
             file = open(str(job.id)+'.txt', 'w')
             file.write(request.data['input'])
             os.system("bash -c\"read -n 1\"")
+            os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-8-oracle"
             command = str("/home/ubuntu/pig-0.15.0/bin/pig -x local -param user_input=\"/home/ubuntu/WebAppStupidServer/"+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f /home/ubuntu/sentence_search.pig")
             file.close()
             self.execute(command)
