@@ -8,7 +8,7 @@ from rest_framework import serializers
 from hadoop.serializer import JobSerializer
 from hadoop.serializer import RequestSerializer
 import requests
-import os.path, subprocess, time
+import os.path, subprocess, time ,os
 import sys
 from subprocess import STDOUT, PIPE
 
@@ -54,7 +54,7 @@ class JobViewList(APIView):
             job = serializer.save()
             file = open(str(job.id)+'.txt', 'w')
             file.write(request.data['input'])
-            command = str("pig -x local -param user_input=\"/home/ubuntu/WebAppStupidServer/"+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f /home/ubuntu/sentence_search.pig")
+            command = str("cd .. ;pig -x local -param user_input=\"/home/ubuntu/WebAppStupidServer/"+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f /home/ubuntu/sentence_search.pig")
             file.close()
             self.execute(command)
             job = Job.objects.get(id=job.id)
@@ -73,7 +73,7 @@ class JobViewList(APIView):
 
     def execute(self, command):
         print (command + "\n")
-        p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+        p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, env=os.environ.copy())
         stdout, stderr = p.communicate()
         print (stdout)
         return p.returncode
