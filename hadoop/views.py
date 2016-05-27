@@ -68,7 +68,7 @@ class JobViewList(APIView):
         return HttpResponse("Error!!")
         
 
-    def execute(command):
+    def execute(self, command):
         print (command + "\n")
         p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         stdout, stderr = p.communicate()
