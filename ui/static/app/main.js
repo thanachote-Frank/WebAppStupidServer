@@ -36,6 +36,7 @@ app.controller('MainAuthController', function($rootScope, Restangular, $state, $
 		var words = "{\"input\": \""+$scope.words+"\"}";
 		$http.post('http://52.221.229.121/hadoop/input/',words).success(function(data){
 						results = data;
+						console.log("Data : "+data);
 						$scope.isSearching = false;
 						$scope.button = "Search";
         });

@@ -64,7 +64,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'social.urls'
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:80',
+    'localhost:8000',
     '52.221.229.121',
     '52.77.248.221',
     '52.77.242.91',
