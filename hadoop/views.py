@@ -49,7 +49,6 @@ class JobViewList(APIView):
 
     def post(self, request):
         serializer = JobSerializer(data=request.data)
-        os.chdir("/home/ubuntu")
         if serializer.is_valid():
             job = serializer.save()
             file = open(str(job.id)+'.txt', 'w')
@@ -73,7 +72,7 @@ class JobViewList(APIView):
 
     def execute(self, command):
         print (command + "\n")
-        p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, env=os.environ.copy())
+        p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         stdout, stderr = p.communicate()
         print (stdout)
         return p.returncode
