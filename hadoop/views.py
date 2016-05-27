@@ -60,7 +60,7 @@ class JobViewList(APIView):
             self.execute(command)
             job = Job.objects.get(id=job.id)
             
-            gatcom = "cat /home/ubuntu/output/"+str(job.id)+" /* >> /home/ubuntu/output/output"+str(job.id)+".txt"
+            gatcom = "cat /home/ubuntu/output/"+str(job.id)+"/* >> /home/ubuntu/output/output"+str(job.id)+".txt"
             self.execute(gatcom)
             with open('/home/ubuntu/output/output'+str(job.id)+".txt", 'r') as myfile:
                 data=myfile.read()
