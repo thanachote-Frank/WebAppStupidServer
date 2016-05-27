@@ -11,8 +11,6 @@ import requests
 import os.path, subprocess, time
 import sys
 from subprocess import STDOUT, PIPE
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
