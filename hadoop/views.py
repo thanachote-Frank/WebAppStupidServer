@@ -49,11 +49,12 @@ class JobViewList(APIView):
 
     def post(self, request):
         serializer = JobSerializer(data=request.data)
+        os.chdir("/home/ubuntu/");
         if serializer.is_valid():
             job = serializer.save()
             file = open(str(job.id)+'.txt', 'w')
             file.write(request.data['input'])
-            command = str("source ~/.bashrc ; cd .. ; /home/ubuntu/pig-0.15.0/bin/pig -x local -param user_input=\"/home/ubuntu/WebAppStupidServer/"+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f /home/ubuntu/sentence_search.pig")
+            command = str("pig -x local -param user_input=\"/home/ubuntu/WebAppStupidServer/"+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f /home/ubuntu/sentence_search.pig")
             file.close()
             self.execute(command)
             job = Job.objects.get(id=job.id)
