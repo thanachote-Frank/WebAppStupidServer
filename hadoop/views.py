@@ -53,13 +53,13 @@ class JobViewList(APIView):
             job = serializer.save()
             file = open(str(job.id)+'.txt', 'w')
             file.write(request.data['input'])
-            command = str("sudo pig -x local -param user_input=\""+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f sentence_search.pig")
+            command = str("pig -x local -param user_input=\""+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f sentence_search.pig")
             file.close()
 
             job = Job.objects.get(id=job.id)
             job.result = self.execute(command)
             job.save()
-            gatcom = "sudo cat /home/ubuntu/output/"+str(job.id)+" /* >> /home/ubuntu/output/output"+str(job.id)+".txt"
+            gatcom = "cat /home/ubuntu/output/"+str(job.id)+" /* >> /home/ubuntu/output/output"+str(job.id)+".txt"
             self.execute(gatcom)
             with open('/home/ubuntu/output/output'+str(job.id)+".txt", 'r') as myfile:
                 data=myfile.read()
