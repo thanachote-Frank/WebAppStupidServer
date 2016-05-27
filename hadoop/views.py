@@ -51,19 +51,21 @@ class JobViewList(APIView):
         serializer = JobSerializer(data=request.data)
         if serializer.is_valid():
             job = serializer.save()
-            file = open(str(job.id)+'.txt', 'w');
+            file = open(str(job.id)+'.txt', 'w')
             file.write(request.data['input'])
-            # command = "pig -x local -param user_input="+str(job.id)+".txt -f sentence_search.pig"
+            command = "sudo pig -x local -param user_input=\""+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f sentence_search.pig"
+            file.close()
 
-            # job = Job.objects.get(id=job.id)
-            # job.result = execute(command)
-            # job.save()
-            # return HttpResponse(job.result)
-            # return HttpResponse("Pass")
-        print ('Debugggggg')
-        return HttpResponse("Pass")
+            job = Job.objects.get(id=job.id)
+            job.result = execute(command)
+            job.save()
+            gatcom = "sudo cat /home/ubuntu/output/"+str(job.id)+" /* >> /home/ubuntu/output/output"+str(job.id)+".txt"
+            with open('/home/ubuntu/output/output'+str(job.id)+".txt", 'r') as myfile:
+                data=myfile.read()
+            return HttpResponse(data)
+
+        return HttpResponse("Error!!")
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def execute(command):
         print (command + "\n")
