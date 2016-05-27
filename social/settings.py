@@ -79,9 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'social.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': []
-}
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
