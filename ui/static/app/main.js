@@ -25,22 +25,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 app.controller('MainAuthController', function($rootScope, Restangular, $state, $scope, $http){
 	$scope.words = "";
-	$scope.results = "";
-
+	$scope.results = "Try search something first!";
+	$scope.isSearching = false;
+	$scope.button = "Search";
 	$scope.SendWords = function(){
-		console.log($scope.words)
-		var words = "{\"input\": "+$scope.words+"}"
+		$scope.isSearching = true;
+		$scope.button = "Loading";
+		$scope.results = "Waiting for results";
+		console.log($scope.words);
+		var words = "{\"input\": "+$scope.words+"}";
 		$http.post('http://52.221.229.121/hadoop/input/',words).success(function(data){
-        	
+						results = data;
+						$scope.isSearching = false;
+						$scope.button = "Search";
         });
-	}
+	};
 
-	$scope.ShowResults = function(){
-		console.log("show");
-		$http.get('http://52.221.229.121/hadoop/input/').success(function(data){
-        	$scope.results = data
-        });
-	}
 });
 
 })();

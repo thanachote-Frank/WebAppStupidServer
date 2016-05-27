@@ -5,39 +5,69 @@
 	<title>Server</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/app.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-desktop.min.css">
 	<script src="assets/js/lodash.min.js"></script>
 	<script src="assets/js/angular.min.js"></script>
 	<script src="assets/js/angular-ui-router.min.js"></script>
 	<script src="assets/js/restangular.min.js"></script>
 	<script src="assets/js/ui-bootstrap-tpls-0.13.4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
 	<script src="app/main.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script>
+	bootcards.init( {
+	  offCanvasBackdrop : true,
+	  offCanvasHideOnMainClick : true,
+	  enableTabletPortraitMode : true,
+	  disableRubberBanding : true,
+	  disableBreakoutSelector : 'a.no-break-out'
+	});
+	</script>
 </head>
 <body ng-app="app.main">
 
 
 <div class="container" ng-controller="MainAuthController">
-<div class="row">
-<div class="col-md-12">
-	<center>
-		<img src="http://www.janium.com/wp-content/uploads/2014/06/books.png" alt="Smiley face" height="110" width="100">
-	</center>
-</div>
-</div>
-<h3> Input </h3>
-<form>
-	<div class="form-group" >
+	<div class="row">
+		<div class="col-md-12">
+			<center>
+				<img src="http://www.janium.com/wp-content/uploads/2014/06/books.png" alt="Smiley face" height="110" width="100">
+			</center>
+		</div>
+		<div class="col-md-12">
+			<center>
+				<h1>Find you book!</h1>
+			</center>
+		</div>
+	</div>
+	<div class="row">
+		<h3> Input </h3>
+		<form>
+			<div class="form-group" >
 
-		<textarea  ng-model="words" id="input" class="form-control" rows="3" maxlength="200"  placeholder="200 words"></textarea>
-		<label for="input">remaining : {{200 - words.length}} words</label>
+				<textarea  ng-model="words" id="input" class="form-control" rows="10" maxlength="200"  placeholder="200 words"></textarea>
+				<label class for="input">Remaining : {{200 - words.length}} words</label>
+			</div>
+			<div class="">
+				<div class="btn btn-success btn-lg btn-block" ng-click="SendWords()" ng-disabled="isSearching">{{button}}</div>
+			</div>
+		</form>
+	</div>
+	<div class="divider">
+
+	</div>
+	<div class="row">
+		<div class="panel panel-default">
+		  <div class="panel-heading clearfix">
+		    <h2 class="panel-title pull-left">Result</h2>
+		  </div>
+		  <div class="panel-body">
+		    <p>{{results}}</p>
+		  </div>
+		</div>
 	</div>
 
-	<div class="btn btn-success form-control" ng-click="SendWords()">Search</div> 
-	<div class="btn btn-primary form-control" ng-click="ShowResults()">Result</div> 
-	<div>
-		{{results}}
-	</div>
-</form>
+
 
 </div>
 
