@@ -55,14 +55,16 @@ class JobViewList(APIView):
             file.write(request.data['input'])
             command = str("cd ..  && pig -x local -param user_input=\"/home/ubuntu/WebAppStupidServer/"+str(job.id)+".txt\" -param output_path=/home/ubuntu/output/"+str(job.id)+" -f /home/ubuntu/sentence_search.pig")
             file.close()
-
+            self.execute(command)
             job = Job.objects.get(id=job.id)
-            job.result = self.execute(command)
-            job.save()
+            
             gatcom = "cat /home/ubuntu/output/"+str(job.id)+" /* >> /home/ubuntu/output/output"+str(job.id)+".txt"
             self.execute(gatcom)
             with open('/home/ubuntu/output/output'+str(job.id)+".txt", 'r') as myfile:
                 data=myfile.read()
+
+            job.result = data
+            job.save()
             return HttpResponse(data)
 
         return HttpResponse("Error!!")
