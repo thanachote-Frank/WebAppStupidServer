@@ -49,7 +49,7 @@ class JobViewList(APIView):
 
     def post(self, request):
         serializer = JobSerializer(data=request.data)
-        os.chdir("/home/ubuntu/");
+        os.chdir("/home/ubuntu")
         if serializer.is_valid():
             job = serializer.save()
             file = open(str(job.id)+'.txt', 'w')
