@@ -33,7 +33,7 @@ app.controller('MainAuthController', function($rootScope, Restangular, $state, $
 		$scope.button = "Loading";
 		$scope.results = "Waiting for results";
 		console.log($scope.words);
-		var words = "{\"input\": "+$scope.words+"}";
+		var words = "{\"input\": \""+$scope.words+"\"}";
 		$http.post('http://52.221.229.121/hadoop/input/',words).success(function(data){
 						results = data;
 						$scope.isSearching = false;

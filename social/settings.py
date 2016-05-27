@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     # 'authapi',
     'hadoop',
     'ui'
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,6 +62,16 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'social.urls'
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:80',
+    '52.221.229.121',
+    '52.77.248.221',
+    '52.77.242.91',
+    '52.221.255.33',
+    '54.168.118.41',
+    '54.168.118.83',
+)
 
 TEMPLATES = [
     {
