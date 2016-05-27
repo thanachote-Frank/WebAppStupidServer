@@ -57,9 +57,10 @@ class JobViewList(APIView):
             file.close()
 
             job = Job.objects.get(id=job.id)
-            job.result = execute(command)
+            job.result = this.execute(command)
             job.save()
             gatcom = "sudo cat /home/ubuntu/output/"+str(job.id)+" /* >> /home/ubuntu/output/output"+str(job.id)+".txt"
+            this.execute(gatcom)
             with open('/home/ubuntu/output/output'+str(job.id)+".txt", 'r') as myfile:
                 data=myfile.read()
             return HttpResponse(data)
